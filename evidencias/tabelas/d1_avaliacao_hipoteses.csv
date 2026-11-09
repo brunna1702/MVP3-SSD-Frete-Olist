@@ -1,0 +1,5 @@
+hipotese,criterio,resultado,veredito
+H2 — frete relativo desigual entre UFs,mediana da UF mais cara ≥ 2× a da mais barata (UFs ≥ 300 itens),"2.06× (MA 39,9% vs SP 19,3%)",confirmada
+H3 — categorias com frete desproporcional,≥ 5 categorias (≥ 500 itens) com mediana ≥ 30%,3 categorias,refutada
+H4 — frete caro reduz compras por habitante,"Spearman < 0 com p < 0,05 (27 UFs)",rho = -0.87; p = 0.0000,confirmada
+H5 — subsídio é financeiramente viável,custo ≤ 2% da receita de produtos,"2,04% (R$ 13.746/mês)",refutada

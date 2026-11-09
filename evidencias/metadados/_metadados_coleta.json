@@ -1,0 +1,100 @@
+{
+  "data_coleta": "2026-11-09T09:40:46",
+  "ambiente": "Execução local de teste — C:\\Users\\Usuario\\Desktop\\Claude\\MVP3-SSD-Frete-Olist\\_local",
+  "pasta_bronze": "C:\\Users\\Usuario\\Desktop\\Claude\\MVP3-SSD-Frete-Olist\\_local\\bronze\\coleta=2026-11-09",
+  "forma_coleta_olist": "kagglehub (olistbr/brazilian-ecommerce, pasta 2)",
+  "forma_coleta_ibge": "API SIDRA (https://apisidra.ibge.gov.br/values/t/6579/n3/all/v/9324/p/2018)",
+  "licenca_olist": "CC BY-NC-SA 4.0",
+  "arquivos": [
+    {
+      "arquivo": "olist_orders_dataset.csv",
+      "fonte": "Kaggle — Olist",
+      "linhas": 99441,
+      "colunas": 8,
+      "bytes": 17654914,
+      "mb": 16.84,
+      "sha256": "8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf"
+    },
+    {
+      "arquivo": "olist_order_items_dataset.csv",
+      "fonte": "Kaggle — Olist",
+      "linhas": 112650,
+      "colunas": 7,
+      "bytes": 15438671,
+      "mb": 14.72,
+      "sha256": "0bc4d068c4fe38cbb01bd90e8746e3c613fe7b4baef75fab7b0e329701c3e279"
+    },
+    {
+      "arquivo": "olist_customers_dataset.csv",
+      "fonte": "Kaggle — Olist",
+      "linhas": 99441,
+      "colunas": 5,
+      "bytes": 9033957,
+      "mb": 8.62,
+      "sha256": "983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2"
+    },
+    {
+      "arquivo": "olist_sellers_dataset.csv",
+      "fonte": "Kaggle — Olist",
+      "linhas": 3095,
+      "colunas": 4,
+      "bytes": 174703,
+      "mb": 0.17,
+      "sha256": "1f643d2b950373b85735e7794b20986f528d7a000432e7c6f9bcbb44d0846a0e"
+    },
+    {
+      "arquivo": "olist_products_dataset.csv",
+      "fonte": "Kaggle — Olist",
+      "linhas": 32951,
+      "colunas": 9,
+      "bytes": 2379446,
+      "mb": 2.27,
+      "sha256": "3e6569628a17fbc75fd206ee357b59e20364b9afa90f5b6cd5b4d624c58aa9cc"
+    },
+    {
+      "arquivo": "olist_order_reviews_dataset.csv",
+      "fonte": "Kaggle — Olist",
+      "linhas": 99224,
+      "colunas": 7,
+      "bytes": 14451670,
+      "mb": 13.78,
+      "sha256": "012b61c7593e34f51fa614efdf802b9c7056ce6aae5307ddb93236e7cfc797d7"
+    },
+    {
+      "arquivo": "olist_order_payments_dataset.csv",
+      "fonte": "Kaggle — Olist",
+      "linhas": 103886,
+      "colunas": 5,
+      "bytes": 5777138,
+      "mb": 5.51,
+      "sha256": "4f713964f2815dbbaa40b9488268c55aac3627bfce5aa96cf58d1f3616de3cc0"
+    },
+    {
+      "arquivo": "olist_geolocation_dataset.csv",
+      "fonte": "Kaggle — Olist",
+      "linhas": 1000163,
+      "colunas": 5,
+      "bytes": 61273883,
+      "mb": 58.44,
+      "sha256": "b514f6fc991b9566aeba02aa5d67e2c3630f034b60a0e05aa0d082a3b66d88d6"
+    },
+    {
+      "arquivo": "product_category_name_translation.csv",
+      "fonte": "Kaggle — Olist",
+      "linhas": 71,
+      "colunas": 2,
+      "bytes": 2613,
+      "mb": 0.0,
+      "sha256": "a81f0d1f27b27e7293f761bc79e3ce8f348ee39c4b3ed3e49bde38f478586278"
+    },
+    {
+      "arquivo": "ibge_populacao_uf_2018.csv",
+      "fonte": "IBGE — SIDRA 6579",
+      "linhas": 27,
+      "colunas": 4,
+      "bytes": 789,
+      "mb": 0.0,
+      "sha256": "e61b6fc59722b251a8384757369891d5809f470e1c7b30c3ef4d325270596bb3"
+    }
+  ]
+}

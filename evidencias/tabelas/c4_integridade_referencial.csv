@@ -1,0 +1,6 @@
+chave_estrangeira,orfaos
+data_compra_sk -> dim_tempo,0
+produto_sk -> dim_produto,0
+vendedor_sk -> dim_vendedor,0
+uf_origem -> dim_uf,0
+uf_destino -> dim_uf,0

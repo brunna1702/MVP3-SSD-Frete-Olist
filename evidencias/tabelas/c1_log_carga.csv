@@ -1,0 +1,6 @@
+tabela,linhas_validadas,linhas_na_nuvem,confere
+dim_uf,27,27,True
+dim_tempo,608,608,True
+dim_produto,32578,32578,True
+dim_vendedor,3029,3029,True
+fato_item_frete,111752,111752,True
