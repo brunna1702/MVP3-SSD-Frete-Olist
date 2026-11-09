@@ -942,6 +942,9 @@ def ddl_restricoes(plat: Plataforma, tabela: str) -> list[str]:
                 partes.append(f"`{col}` <= {d['max']}")
             expr = " AND ".join(partes)
         if expr:
+            if not c["obrigatorio"]:
+                # No Delta, um CHECK que resulta em NULL conta como violação; o nulo é permitido pelo catálogo
+                expr = f"`{col}` IS NULL OR ({expr})"
             ck = f"ck_{tabela}_{col}"[:120]
             cmds.append(f"ALTER TABLE {nome} DROP CONSTRAINT IF EXISTS {ck}")
             cmds.append(f"ALTER TABLE {nome} ADD CONSTRAINT {ck} CHECK ({expr})")
