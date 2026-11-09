@@ -172,10 +172,10 @@ A população por UF não está na Olist. Ela vem do IBGE e é **conciliada pela
 
 | Item | Valor registrado |
 |---|---|
-| **Data da coleta** | [DATA DA COLETA NO DATABRICKS] — ver [`evidencias/metadados/_metadados_coleta.json`](evidencias/metadados/_metadados_coleta.json) |
+| **Data da coleta** | 09/11/2026, no Databricks Free Edition — ver [`evidencias/metadados/_metadados_coleta.json`](evidencias/metadados/_metadados_coleta.json) |
 | **Formato original** | 10 arquivos CSV (UTF-8, separador vírgula) |
 | **Volume** | 120,35 MB · 1.550.949 registros (1.550.922 da Olist + 27 do IBGE) |
-| **Pasta na bronze** | `/Volumes/workspace/frete_bronze/arquivos/coleta=AAAA-MM-DD/` |
+| **Pasta na bronze** | `/Volumes/workspace/frete_bronze/arquivos/coleta=2026-11-09/` |
 
 | Arquivo | Conteúdo | Registros | Colunas | MB |
 |---|---|---:|---:|---:|
@@ -193,7 +193,7 @@ A população por UF não está na Olist. Ela vem do IBGE e é **conciliada pela
 O hash **SHA-256** de cada arquivo fica no `_metadados_coleta.json`. O notebook 02 confere os hashes antes de ler a
 bronze: se um arquivo for alterado depois da coleta, o pipeline para.
 
-> 📷 Evidência: [`evidencias/01_volume_bronze.png`](evidencias/01_volume_bronze.png) — Volume da bronze no Catalog Explorer.
+![Volume da camada bronze no Catalog Explorer: os 10 CSVs e o arquivo de metadados](evidencias/01_volume_bronze.png)
 
 ## 5. Qualidade dos dados
 
@@ -303,8 +303,14 @@ vez**, em `CATALOGO_GOLD` no módulo [`mvp_frete.py`](scripts/mvp_frete.py), e d
 5. a **validação automática** antes da carga: 54 de 54 atributos aprovados →
    [`m1_validacao_catalogo.csv`](evidencias/tabelas/m1_validacao_catalogo.csv).
 
-> 📷 Evidências: [`04_gold_colunas_fato.png`](evidencias/04_gold_colunas_fato.png) (comentários das colunas) ·
-> [`05_gold_diagrama_er.png`](evidencias/05_gold_diagrama_er.png) (diagrama gerado pelo Databricks a partir das PK/FK).
+O diagrama abaixo foi **gerado pelo próprio Databricks** a partir das chaves primárias e estrangeiras gravadas pelo
+pipeline. A `dim_uf` recebe duas ligações (origem e destino):
+
+![Diagrama de relacionamentos do modelo estrela no Databricks](evidencias/05_gold_diagrama_er.png)
+
+As colunas da fato no Catalog Explorer, com as etiquetas PK/FK e a descrição vinda do catálogo:
+
+![Colunas da fato_item_frete com comentários e chaves](evidencias/04_gold_colunas_fato.png)
 
 ## 8. Carga na camada gold
 
@@ -327,11 +333,17 @@ Depois da carga, o notebook 03 consulta a gold **por SQL**:
 | Registros órfãos nas 5 chaves estrangeiras | 0 | [`c4`](evidencias/tabelas/c4_integridade_referencial.csv) · [SQL](scripts/sql/c4_integridade_referencial.sql) |
 | Reconciliação silver × gold (itens, receita, frete) | idêntica | [`c5`](evidencias/tabelas/c5_reconciliacao_silver_gold.csv) · [SQL](scripts/sql/c5_reconciliacao_silver_gold.sql) |
 
-> 📷 Evidências: [`02_silver_tabelas.png`](evidencias/02_silver_tabelas.png) · [`03_gold_tabelas.png`](evidencias/03_gold_tabelas.png)
+![Conferências SQL na gold: chaves únicas, nenhum órfão e reconciliação silver × gold](evidencias/06_notebook_03_conferencias.png)
+
+Tabelas persistidas nas camadas silver e gold:
+
+![Tabelas da camada silver](evidencias/02_silver_tabelas.png)
+
+![Tabelas da camada gold](evidencias/03_gold_tabelas.png)
 
 ## 9. Análise: solução do problema
 
-Todas as respostas partem de **consultas SQL sobre a gold**, guardadas em [`scripts/sql/`](scripts/sql/). O Python
+Os notebooks em [`notebooks/`](notebooks/) foram exportados **com as saídas da execução no Databricks**. Todas as respostas partem de **consultas SQL sobre a gold**, guardadas em [`scripts/sql/`](scripts/sql/). O Python
 entra só nos testes estatísticos (Spearman e regressão OLS com erros robustos) e nos gráficos. Os resultados completos
 estão no notebook [`04_analise`](notebooks/04_analise.ipynb) e em [`evidencias/tabelas/`](evidencias/tabelas/).
 
@@ -423,6 +435,8 @@ Sensibilidade ([`p5_sensibilidade.csv`](evidencias/tabelas/p5_sensibilidade.csv)
 
 ### Avaliação das hipóteses (critérios definidos antes da análise)
 
+![Avaliação das hipóteses no notebook 04, executado no Databricks](evidencias/07_notebook_04_hipoteses.png)
+
 | Hipótese | Critério | Resultado | Veredito |
 |---|---|---|---|
 | **H2** — frete relativo desigual entre UFs | mais cara ≥ 2× a mais barata (UFs ≥ 300 itens) | **2,06×** (MA 39,9% × SP 19,3%) | ✅ Confirmada |
@@ -449,9 +463,9 @@ As duas hipóteses refutadas também ensinam algo:
 | Item | Medida |
 |---|---|
 | Plataforma | Databricks **Free Edition**, computação *serverless* — **US$ 0,00** |
-| Armazenamento bronze (CSV originais) | 120,35 MB |
-| Armazenamento gold (Delta, modelo + metadados) | ≈ 8 MB → [`f1_armazenamento_gold.csv`](evidencias/tabelas/f1_armazenamento_gold.csv) |
-| Execução completa (4 notebooks) | [TEMPO MEDIDO NO DATABRICKS] na computação *serverless* (cerca de 2,5 min no teste local) |
+| Armazenamento bronze (Volume, CSV originais + metadados) | 120,34 MB |
+| Armazenamento gold (Delta, modelo + metadados) | 5,43 MB em 24 arquivos Delta, medidos com `DESCRIBE DETAIL` → [`f1_armazenamento_gold.csv`](evidencias/tabelas/f1_armazenamento_gold.csv) |
+| Execução completa (4 notebooks) | **7,8 min** na computação *serverless* (01: 46 s · 02: 1,6 min · 03: 3,8 min · 04: 1,6 min), medidos pelos tempos de cada célula |
 | Custo da ação recomendada (prioridade 1) | ≈ R$ 5,1 mil/mês, ou 0,75% da receita de produtos |
 
 * **O MVP em si não tem custo de operação.** O volume cabe com folga nos limites da Free Edition.
