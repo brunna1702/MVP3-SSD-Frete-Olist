@@ -2,16 +2,16 @@ tabela,atributo,tipo_esperado,linhas,nulos,pct_nulos,distintos,pct_conformidade_
 orders,order_id,hash,99441,0,0.0,99441,100.0,,,
 orders,customer_id,hash,99441,0,0.0,99441,100.0,,,
 orders,order_status,texto,99441,0,0.0,8,100.0,approved,unavailable,delivered (96478); shipped (1107); canceled (625)
-orders,order_purchase_timestamp,data,99441,0,0.0,98875,100.0,2016-09-04 21:15:19,2018-10-17 17:30:18,2018-03-31 15:08:21 (3); 2017-11-20 10:59:08 (3); 2018-08-02 12:06:09 (3)
-orders,order_approved_at,data,99441,160,0.16,90733,100.0,2016-09-15 12:16:38,2018-09-03 17:40:06,2018-02-27 04:31:10 (9); 2017-11-07 07:30:38 (7); 2018-02-06 05:31:52 (7)
+orders,order_purchase_timestamp,data,99441,0,0.0,98875,100.0,2016-09-04 21:15:19,2018-10-17 17:30:18,2018-04-11 10:48:14 (3); 2018-07-28 13:11:22 (3); 2017-11-20 10:59:08 (3)
+orders,order_approved_at,data,99441,160,0.16,90733,100.0,2016-09-15 12:16:38,2018-09-03 17:40:06,2018-02-27 04:31:10 (9); 2017-11-07 07:30:38 (7); 2018-02-27 04:31:01 (7)
 orders,order_delivered_carrier_date,data,99441,1783,1.79,81018,100.0,2016-10-08 10:34:01,2018-09-11 19:48:28,2018-05-09 15:48:00 (47); 2018-05-10 18:29:00 (32); 2018-05-07 12:31:00 (21)
-orders,order_delivered_customer_date,data,99441,2965,2.98,95664,100.0,2016-10-11 13:46:32,2018-10-17 13:22:46,2018-05-14 20:02:44 (3); 2016-10-27 17:32:07 (3); 2018-05-08 23:38:46 (3)
-orders,order_estimated_delivery_date,data,99441,0,0.0,459,100.0,2016-09-30 00:00:00,2018-11-12 00:00:00,2017-12-20 00:00:00 (522); 2018-03-12 00:00:00 (516); 2018-03-13 00:00:00 (513)
+orders,order_delivered_customer_date,data,99441,2965,2.98,95664,100.0,2016-10-11 13:46:32,2018-10-17 13:22:46,2018-05-08 23:38:46 (3); 2016-10-27 17:32:07 (3); 2018-02-14 21:09:19 (3)
+orders,order_estimated_delivery_date,data,99441,0,0.0,459,100.0,2016-09-30 00:00:00,2018-11-12 00:00:00,2017-12-20 00:00:00 (522); 2018-03-12 00:00:00 (516); 2018-05-29 00:00:00 (513)
 order_items,order_id,hash,112650,0,0.0,98666,100.0,,,
 order_items,order_item_id,inteiro,112650,0,0.0,21,100.0,1,21,1 (98666); 2 (9803); 3 (2287)
 order_items,product_id,hash,112650,0,0.0,32951,100.0,,,
 order_items,seller_id,hash,112650,0,0.0,3095,100.0,,,
-order_items,shipping_limit_date,data,112650,0,0.0,93318,100.0,2016-09-19 00:15:34,2020-04-09 22:35:08,2018-03-01 02:50:48 (21); 2017-07-21 18:25:23 (21); 2017-08-30 14:30:23 (20)
+order_items,shipping_limit_date,data,112650,0,0.0,93318,100.0,2016-09-19 00:15:34,2020-04-09 22:35:08,2017-07-21 18:25:23 (21); 2018-03-01 02:50:48 (21); 2017-08-30 14:30:23 (20)
 order_items,price,numero,112650,0,0.0,5968,100.0,0.85,6735.0,59.90 (2481); 69.90 (1987); 49.90 (1953)
 order_items,freight_value,numero,112650,0,0.0,6999,100.0,0.0,409.68,15.10 (3707); 7.78 (2262); 14.10 (1875)
 customers,customer_id,hash,99441,0,0.0,99441,100.0,,,
@@ -20,13 +20,13 @@ customers,customer_zip_code_prefix,cep,99441,0,0.0,14994,100.0,01003,99990,22790
 customers,customer_city,texto,99441,0,0.0,4119,100.0,abadia dos dourados,zortea,sao paulo (15540); rio de janeiro (6882); belo horizonte (2773)
 customers,customer_state,texto,99441,0,0.0,27,100.0,AC,TO,SP (41746); RJ (12852); MG (11635)
 sellers,seller_id,hash,3095,0,0.0,3095,100.0,,,
-sellers,seller_zip_code_prefix,cep,3095,0,0.0,2246,100.0,01001,99730,14940 (49); 13660 (10); 16200 (9)
+sellers,seller_zip_code_prefix,cep,3095,0,0.0,2246,100.0,01001,99730,14940 (49); 13660 (10); 13920 (9)
 sellers,seller_city,texto,3095,0,0.0,611,100.0,04482255,xaxim,sao paulo (694); curitiba (127); rio de janeiro (96)
 sellers,seller_state,texto,3095,0,0.0,23,100.0,AC,SP,SP (1849); PR (349); MG (244)
 products,product_id,hash,32951,0,0.0,32951,100.0,,,
 products,product_category_name,texto,32951,610,1.85,73,100.0,agro_industria_e_comercio,utilidades_domesticas,cama_mesa_banho (3029); esporte_lazer (2867); moveis_decoracao (2657)
 products,product_name_lenght,inteiro,32951,610,1.85,66,100.0,5.0,76.0,60 (2182); 59 (2025); 58 (1887)
-products,product_description_lenght,inteiro,32951,610,1.85,2960,100.0,4.0,3992.0,404 (94); 729 (86); 703 (66)
+products,product_description_lenght,inteiro,32951,610,1.85,2960,100.0,4.0,3992.0,404 (94); 729 (86); 651 (66)
 products,product_photos_qty,inteiro,32951,610,1.85,19,100.0,1.0,20.0,1 (16489); 2 (6263); 3 (3860)
 products,product_weight_g,numero,32951,2,0.01,2204,100.0,0.0,40425.0,200 (2084); 300 (1561); 150 (1259)
 products,product_length_cm,numero,32951,2,0.01,99,100.0,7.0,105.0,16 (5520); 20 (2816); 30 (2029)
@@ -40,7 +40,7 @@ order_reviews,review_comment_message,texto,99224,58247,58.7,36159,100.0,"
 ","😡😡😡😡😡👎👎👎👎👎
 Empresa sem compromisso com o cliente",Muito bom (230); Bom (189); muito bom (122)
 order_reviews,review_creation_date,data,99224,0,0.0,636,100.0,2016-10-02 00:00:00,2018-08-31 00:00:00,2017-12-19 00:00:00 (463); 2018-08-28 00:00:00 (452); 2017-12-20 00:00:00 (440)
-order_reviews,review_answer_timestamp,data,99224,0,0.0,98248,100.0,2016-10-07 18:32:28,2018-10-29 12:27:35,2017-06-15 23:21:05 (4); 2017-02-14 13:58:48 (3); 2017-09-11 09:58:09 (3)
+order_reviews,review_answer_timestamp,data,99224,0,0.0,98248,100.0,2016-10-07 18:32:28,2018-10-29 12:27:35,2017-06-15 23:21:05 (4); 2018-02-26 15:53:18 (3); 2018-04-07 21:13:05 (3)
 order_payments,order_id,hash,103886,0,0.0,99440,100.0,,,
 order_payments,payment_sequential,inteiro,103886,0,0.0,29,100.0,1,29,1 (99360); 2 (3039); 3 (581)
 order_payments,payment_type,texto,103886,0,0.0,5,100.0,boleto,voucher,credit_card (76795); boleto (19784); voucher (5775)
@@ -51,9 +51,9 @@ geolocation,geolocation_lat,numero,1000163,0,0.0,717372,100.0,-36.6053744107061,
 geolocation,geolocation_lng,numero,1000163,0,0.0,717615,100.0,-101.46676644931476,121.10539381057764,-48.62961349999995 (314); -46.87468669635919 (190); -46.71737739541604 (141)
 geolocation,geolocation_city,texto,1000163,0,0.0,8011,100.0,* cidade,óleo,sao paulo (135800); rio de janeiro (62151); belo horizonte (27805)
 geolocation,geolocation_state,texto,1000163,0,0.0,27,100.0,AC,TO,SP (404268); MG (126336); RJ (121169)
-product_category_name_translation,product_category_name,texto,71,0,0.0,71,100.0,agro_industria_e_comercio,utilidades_domesticas,beleza_saude (1); informatica_acessorios (1); automotivo (1)
-product_category_name_translation,product_category_name_english,texto,71,0,0.0,71,100.0,agro_industry_and_commerce,watches_gifts,health_beauty (1); computers_accessories (1); auto (1)
-ibge_populacao_uf_2018,codigo_ibge,inteiro,27,0,0.0,27,100.0,11,53,11 (1); 12 (1); 13 (1)
-ibge_populacao_uf_2018,uf_nome,texto,27,0,0.0,27,100.0,Acre,Tocantins,Rondônia (1); Acre (1); Amazonas (1)
+product_category_name_translation,product_category_name,texto,71,0,0.0,71,100.0,agro_industria_e_comercio,utilidades_domesticas,beleza_saude (1); alimentos (1); fashion_esporte (1)
+product_category_name_translation,product_category_name_english,texto,71,0,0.0,71,100.0,agro_industry_and_commerce,watches_gifts,health_beauty (1); food (1); fashion_sport (1)
+ibge_populacao_uf_2018,codigo_ibge,inteiro,27,0,0.0,27,100.0,11,53,11 (1); 28 (1); 52 (1)
+ibge_populacao_uf_2018,uf_nome,texto,27,0,0.0,27,100.0,Acre,Tocantins,Rondônia (1); Sergipe (1); Goiás (1)
 ibge_populacao_uf_2018,ano,inteiro,27,0,0.0,1,100.0,2018,2018,2018 (27)
-ibge_populacao_uf_2018,populacao,inteiro,27,0,0.0,27,100.0,576568,45538936,1757589 (1); 869265 (1); 4080611 (1)
+ibge_populacao_uf_2018,populacao,inteiro,27,0,0.0,27,100.0,576568,45538936,1757589 (1); 2278308 (1); 6921161 (1)

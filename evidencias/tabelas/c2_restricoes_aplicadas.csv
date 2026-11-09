@@ -1,193 +1,193 @@
 comando,status,tipo
-COMMENT ON TABLE dim_uf IS 'Unidades da Federação com região e população estimada 2018 (IBGE). Dimensão com dois papéis na fato: UF de origem (vendedor) e UF de destino (cliente).',não aplicável (execução local),comentário de tabela
-ALTER TABLE dim_uf ALTER COLUMN `uf` COMMENT 'Sigla da UF',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_uf ALTER COLUMN `uf` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_uf,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE dim_uf ADD CONSTRAINT ck_dim_uf_uf CHECK (`uf` IN ('AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'))",não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_uf ALTER COLUMN `uf_nome` COMMENT 'Nome da UF',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_uf ALTER COLUMN `uf_nome` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_uf ALTER COLUMN `codigo_ibge` COMMENT 'Código IBGE da UF',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_uf ALTER COLUMN `codigo_ibge` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_codigo_ibge,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_uf ADD CONSTRAINT ck_dim_uf_codigo_ibge CHECK (`codigo_ibge` >= 11 AND `codigo_ibge` <= 53),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_uf ALTER COLUMN `regiao` COMMENT 'Grande região',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_uf ALTER COLUMN `regiao` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_regiao,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE dim_uf ADD CONSTRAINT ck_dim_uf_regiao CHECK (`regiao` IN ('Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul'))",não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_uf ALTER COLUMN `populacao_2018` COMMENT 'População residente estimada em 2018 (pessoas)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_uf ALTER COLUMN `populacao_2018` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_populacao_2018,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_uf ADD CONSTRAINT ck_dim_uf_populacao_2018 CHECK (`populacao_2018` >= 400000 AND `populacao_2018` <= 50000000),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_uf ALTER COLUMN `lat_centroide` COMMENT 'Latitude mediana dos CEPs da UF (graus)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_lat_centroide,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_uf ADD CONSTRAINT ck_dim_uf_lat_centroide CHECK (`lat_centroide` >= -34 AND `lat_centroide` <= 5.3),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_uf ALTER COLUMN `lon_centroide` COMMENT 'Longitude mediana dos CEPs da UF (graus)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_lon_centroide,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_uf ADD CONSTRAINT ck_dim_uf_lon_centroide CHECK (`lon_centroide` >= -74 AND `lon_centroide` <= -34.7),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_uf ADD CONSTRAINT pk_dim_uf PRIMARY KEY (`uf`),não aplicável (execução local),PRIMARY KEY
-COMMENT ON TABLE dim_tempo IS 'Calendário diário da janela de análise (jan/2017 a ago/2018).',não aplicável (execução local),comentário de tabela
-ALTER TABLE dim_tempo ALTER COLUMN `data_sk` COMMENT 'Chave da data no formato AAAAMMDD',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_tempo ALTER COLUMN `data_sk` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_data_sk,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_tempo ADD CONSTRAINT ck_dim_tempo_data_sk CHECK (`data_sk` >= 20170101 AND `data_sk` <= 20180831),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_tempo ALTER COLUMN `data` COMMENT 'Data',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_tempo ALTER COLUMN `data` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_tempo ALTER COLUMN `ano` COMMENT 'Ano',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_tempo ALTER COLUMN `ano` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_ano,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_tempo ADD CONSTRAINT ck_dim_tempo_ano CHECK (`ano` >= 2017 AND `ano` <= 2018),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_tempo ALTER COLUMN `mes` COMMENT 'Mês (1–12)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_tempo ALTER COLUMN `mes` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_mes,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_tempo ADD CONSTRAINT ck_dim_tempo_mes CHECK (`mes` >= 1 AND `mes` <= 12),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_tempo ALTER COLUMN `ano_mes` COMMENT 'Ano e mês (AAAA-MM)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_tempo ALTER COLUMN `ano_mes` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_tempo ALTER COLUMN `nome_mes` COMMENT 'Mês abreviado',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_tempo ALTER COLUMN `nome_mes` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_nome_mes,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE dim_tempo ADD CONSTRAINT ck_dim_tempo_nome_mes CHECK (`nome_mes` IN ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'))",não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_tempo ALTER COLUMN `trimestre` COMMENT 'Trimestre (1–4)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_tempo ALTER COLUMN `trimestre` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_trimestre,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_tempo ADD CONSTRAINT ck_dim_tempo_trimestre CHECK (`trimestre` >= 1 AND `trimestre` <= 4),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_tempo ALTER COLUMN `dia_semana` COMMENT 'Dia da semana',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_tempo ALTER COLUMN `dia_semana` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_dia_semana,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE dim_tempo ADD CONSTRAINT ck_dim_tempo_dia_semana CHECK (`dia_semana` IN ('segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'))",não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_tempo ALTER COLUMN `fim_de_semana` COMMENT 'Sábado ou domingo',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_tempo ALTER COLUMN `fim_de_semana` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_tempo ADD CONSTRAINT pk_dim_tempo PRIMARY KEY (`data_sk`),não aplicável (execução local),PRIMARY KEY
-"COMMENT ON TABLE dim_produto IS 'Produtos vendidos na janela, com categoria e medidas usadas no cálculo do frete.'",não aplicável (execução local),comentário de tabela
-ALTER TABLE dim_produto ALTER COLUMN `produto_sk` COMMENT 'Chave substituta do produto',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto ALTER COLUMN `produto_sk` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_produto_sk,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_produto ADD CONSTRAINT ck_dim_produto_produto_sk CHECK (`produto_sk` >= 1),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_produto ALTER COLUMN `produto_id` COMMENT 'Identificador do produto na Olist (hash)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto ALTER COLUMN `produto_id` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_produto ALTER COLUMN `categoria` COMMENT 'Categoria do produto (nome original em português)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto ALTER COLUMN `categoria` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_produto ALTER COLUMN `peso_g` COMMENT 'Peso informado (g)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_peso_g,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_produto ADD CONSTRAINT ck_dim_produto_peso_g CHECK (`peso_g` >= 1 AND `peso_g` <= 50000),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_produto ALTER COLUMN `comprimento_cm` COMMENT 'Comprimento da embalagem (cm)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_comprimento_cm,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_produto ADD CONSTRAINT ck_dim_produto_comprimento_cm CHECK (`comprimento_cm` >= 1 AND `comprimento_cm` <= 120),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_produto ALTER COLUMN `altura_cm` COMMENT 'Altura da embalagem (cm)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_altura_cm,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_produto ADD CONSTRAINT ck_dim_produto_altura_cm CHECK (`altura_cm` >= 1 AND `altura_cm` <= 120),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_produto ALTER COLUMN `largura_cm` COMMENT 'Largura da embalagem (cm)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_largura_cm,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_produto ADD CONSTRAINT ck_dim_produto_largura_cm CHECK (`largura_cm` >= 1 AND `largura_cm` <= 120),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_produto ALTER COLUMN `volume_cm3` COMMENT 'Volume da embalagem (cm³)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_volume_cm3,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_produto ADD CONSTRAINT ck_dim_produto_volume_cm3 CHECK (`volume_cm3` >= 1 AND `volume_cm3` <= 1728000),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_produto ALTER COLUMN `peso_real_kg` COMMENT 'Peso real (kg)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_peso_real_kg,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_produto ADD CONSTRAINT ck_dim_produto_peso_real_kg CHECK (`peso_real_kg` >= 0.001 AND `peso_real_kg` <= 50),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_produto ALTER COLUMN `peso_cubado_kg` COMMENT 'Peso cubado (kg) = volume ÷ 6000',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_peso_cubado_kg,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_produto ADD CONSTRAINT ck_dim_produto_peso_cubado_kg CHECK (`peso_cubado_kg` >= 0 AND `peso_cubado_kg` <= 300),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_produto ALTER COLUMN `peso_taxado_kg` COMMENT 'Peso usado para cobrança: maior entre real e cubado (kg)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_peso_taxado_kg,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_produto ADD CONSTRAINT ck_dim_produto_peso_taxado_kg CHECK (`peso_taxado_kg` >= 0 AND `peso_taxado_kg` <= 300),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_produto ALTER COLUMN `medidas_incompletas` COMMENT 'Peso ou alguma dimensão ausente',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_produto ALTER COLUMN `medidas_incompletas` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_produto ADD CONSTRAINT pk_dim_produto PRIMARY KEY (`produto_sk`),não aplicável (execução local),PRIMARY KEY
-"COMMENT ON TABLE dim_vendedor IS 'Vendedores com vendas na janela, localização de origem e porte.'",não aplicável (execução local),comentário de tabela
-ALTER TABLE dim_vendedor ALTER COLUMN `vendedor_sk` COMMENT 'Chave substituta do vendedor',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_vendedor ALTER COLUMN `vendedor_sk` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_vendedor DROP CONSTRAINT IF EXISTS ck_dim_vendedor_vendedor_sk,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_vendedor ADD CONSTRAINT ck_dim_vendedor_vendedor_sk CHECK (`vendedor_sk` >= 1),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_vendedor ALTER COLUMN `vendedor_id` COMMENT 'Identificador do vendedor na Olist (hash)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_vendedor ALTER COLUMN `vendedor_id` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_vendedor ALTER COLUMN `uf` COMMENT 'UF do vendedor',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_vendedor ALTER COLUMN `uf` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_vendedor DROP CONSTRAINT IF EXISTS ck_dim_vendedor_uf,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE dim_vendedor ADD CONSTRAINT ck_dim_vendedor_uf CHECK (`uf` IN ('AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'))",não aplicável (execução local),CHECK (domínio)
-"ALTER TABLE dim_vendedor ALTER COLUMN `cidade` COMMENT 'Cidade do vendedor (minúsculas, sem acento)'",não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_vendedor ALTER COLUMN `cidade` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_vendedor ALTER COLUMN `cep_prefixo` COMMENT 'Prefixo de CEP (5 dígitos)',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_vendedor ALTER COLUMN `cep_prefixo` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_vendedor ALTER COLUMN `itens_vendidos_janela` COMMENT 'Itens vendidos na janela',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_vendedor ALTER COLUMN `itens_vendidos_janela` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_vendedor DROP CONSTRAINT IF EXISTS ck_dim_vendedor_itens_vendidos_janela,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE dim_vendedor ADD CONSTRAINT ck_dim_vendedor_itens_vendidos_janela CHECK (`itens_vendidos_janela` >= 1 AND `itens_vendidos_janela` <= 5000),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_vendedor ALTER COLUMN `porte` COMMENT 'Porte pelo volume de itens',não aplicável (execução local),comentário de coluna
-ALTER TABLE dim_vendedor ALTER COLUMN `porte` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE dim_vendedor DROP CONSTRAINT IF EXISTS ck_dim_vendedor_porte,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE dim_vendedor ADD CONSTRAINT ck_dim_vendedor_porte CHECK (`porte` IN ('micro (1–9 itens)', 'pequeno (10–49)', 'médio (50–199)', 'grande (200+)'))",não aplicável (execução local),CHECK (domínio)
-ALTER TABLE dim_vendedor ADD CONSTRAINT pk_dim_vendedor PRIMARY KEY (`vendedor_sk`),não aplicável (execução local),PRIMARY KEY
-"COMMENT ON TABLE fato_item_frete IS 'Fato do frete. Grão: item vendido (pedido × sequência do item), compras de jan/2017 a ago/2018 que geraram envio.'",não aplicável (execução local),comentário de tabela
-ALTER TABLE fato_item_frete ALTER COLUMN `item_sk` COMMENT 'Chave substituta do item',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `item_sk` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_item_sk,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_item_sk CHECK (`item_sk` >= 1),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `pedido_id` COMMENT 'Identificador do pedido (hash)',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `pedido_id` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete ALTER COLUMN `item_seq` COMMENT 'Sequência do item dentro do pedido',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `item_seq` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_item_seq,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_item_seq CHECK (`item_seq` >= 1 AND `item_seq` <= 25),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `data_compra_sk` COMMENT 'Data da compra (FK dim_tempo)',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `data_compra_sk` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_data_compra_sk,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_data_compra_sk CHECK (`data_compra_sk` >= 20170101 AND `data_compra_sk` <= 20180831),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `produto_sk` COMMENT 'Produto (FK dim_produto)',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `produto_sk` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_produto_sk,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_produto_sk CHECK (`produto_sk` >= 1),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `vendedor_sk` COMMENT 'Vendedor (FK dim_vendedor)',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `vendedor_sk` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_vendedor_sk,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_vendedor_sk CHECK (`vendedor_sk` >= 1),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `uf_origem` COMMENT 'UF do vendedor — papel origem (FK dim_uf)',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `uf_origem` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_uf_origem,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_uf_origem CHECK (`uf_origem` IN ('AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'))",não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `uf_destino` COMMENT 'UF do cliente — papel destino (FK dim_uf)',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `uf_destino` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_uf_destino,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_uf_destino CHECK (`uf_destino` IN ('AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'))",não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `status_pedido` COMMENT 'Status do pedido na extração',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `status_pedido` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_status_pedido,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_status_pedido CHECK (`status_pedido` IN ('delivered', 'shipped', 'invoiced', 'processing', 'created', 'approved'))",não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `preco` COMMENT 'Preço do item (R$)',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `preco` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_preco,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_preco CHECK (`preco` >= 0.01 AND `preco` <= 10000),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `frete` COMMENT 'Frete do item (R$); a Olist rateia o frete do pedido entre os itens',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `frete` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_frete,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_frete CHECK (`frete` >= 0 AND `frete` <= 1000),não aplicável (execução local),CHECK (domínio)
-"ALTER TABLE fato_item_frete ALTER COLUMN `frete_relativo` COMMENT 'Frete ÷ preço do item (0,30 = frete equivale a 30% do preço)'",não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `frete_relativo` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_frete_relativo,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_frete_relativo CHECK (`frete_relativo` >= 0 AND `frete_relativo` <= 100),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `frete_gratis` COMMENT 'Frete igual a zero',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `frete_gratis` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete ALTER COLUMN `faixa_frete_relativo` COMMENT 'Faixa do frete relativo',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `faixa_frete_relativo` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_faixa_frete_relativo,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_faixa_frete_relativo CHECK (`faixa_frete_relativo` IN ('0 (grátis)', 'até 10%', '10–20%', '20–30%', '30–50%', '50–100%', 'acima de 100%'))",não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `distancia_km` COMMENT 'Distância em linha reta vendedor → cliente (km)',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_distancia_km,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_distancia_km CHECK (`distancia_km` >= 0 AND `distancia_km` <= 4500),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `faixa_distancia` COMMENT 'Faixa de distância',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_faixa_distancia,não aplicável (execução local),remoção prévia de CHECK
-"ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_faixa_distancia CHECK (`faixa_distancia` IN ('até 100 km', '100–500 km', '500–1.000 km', '1.000–2.000 km', '2.000 km ou mais'))",não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `mesma_uf` COMMENT 'Vendedor e cliente na mesma UF',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `mesma_uf` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete ALTER COLUMN `itens_no_pedido` COMMENT 'Quantidade de itens no pedido',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete ALTER COLUMN `itens_no_pedido` SET NOT NULL,não aplicável (execução local),NOT NULL
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_itens_no_pedido,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_itens_no_pedido CHECK (`itens_no_pedido` >= 1 AND `itens_no_pedido` <= 25),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ALTER COLUMN `nota_avaliacao` COMMENT 'Nota da avaliação do pedido (1–5)',não aplicável (execução local),comentário de coluna
-ALTER TABLE fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_nota_avaliacao,não aplicável (execução local),remoção prévia de CHECK
-ALTER TABLE fato_item_frete ADD CONSTRAINT ck_fato_item_frete_nota_avaliacao CHECK (`nota_avaliacao` >= 1 AND `nota_avaliacao` <= 5),não aplicável (execução local),CHECK (domínio)
-ALTER TABLE fato_item_frete ADD CONSTRAINT pk_fato_item_frete PRIMARY KEY (`item_sk`),não aplicável (execução local),PRIMARY KEY
-ALTER TABLE fato_item_frete ADD CONSTRAINT fk_fato_data_compra_sk FOREIGN KEY (`data_compra_sk`) REFERENCES dim_tempo (`data_sk`),não aplicável (execução local),FOREIGN KEY
-ALTER TABLE fato_item_frete ADD CONSTRAINT fk_fato_produto_sk FOREIGN KEY (`produto_sk`) REFERENCES dim_produto (`produto_sk`),não aplicável (execução local),FOREIGN KEY
-ALTER TABLE fato_item_frete ADD CONSTRAINT fk_fato_vendedor_sk FOREIGN KEY (`vendedor_sk`) REFERENCES dim_vendedor (`vendedor_sk`),não aplicável (execução local),FOREIGN KEY
-ALTER TABLE fato_item_frete ADD CONSTRAINT fk_fato_uf_origem FOREIGN KEY (`uf_origem`) REFERENCES dim_uf (`uf`),não aplicável (execução local),FOREIGN KEY
-ALTER TABLE fato_item_frete ADD CONSTRAINT fk_fato_uf_destino FOREIGN KEY (`uf_destino`) REFERENCES dim_uf (`uf`),não aplicável (execução local),FOREIGN KEY
+COMMENT ON TABLE workspace.frete_gold.dim_uf IS 'Unidades da Federação com região e população estimada 2018 (IBGE). Dimensão com dois papéis na fato: UF de origem (vendedor) e UF de destino (cliente).',aplicado,comentário de tabela
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `uf` COMMENT 'Sigla da UF',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `uf` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_uf,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.dim_uf ADD CONSTRAINT ck_dim_uf_uf CHECK (`uf` IN ('AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'))",aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `uf_nome` COMMENT 'Nome da UF',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `uf_nome` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `codigo_ibge` COMMENT 'Código IBGE da UF',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `codigo_ibge` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_codigo_ibge,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_uf ADD CONSTRAINT ck_dim_uf_codigo_ibge CHECK (`codigo_ibge` >= 11 AND `codigo_ibge` <= 53),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `regiao` COMMENT 'Grande região',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `regiao` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_regiao,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.dim_uf ADD CONSTRAINT ck_dim_uf_regiao CHECK (`regiao` IN ('Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul'))",aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `populacao_2018` COMMENT 'População residente estimada em 2018 (pessoas)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `populacao_2018` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_populacao_2018,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_uf ADD CONSTRAINT ck_dim_uf_populacao_2018 CHECK (`populacao_2018` >= 400000 AND `populacao_2018` <= 50000000),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `lat_centroide` COMMENT 'Latitude mediana dos CEPs da UF (graus)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_lat_centroide,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_uf ADD CONSTRAINT ck_dim_uf_lat_centroide CHECK (`lat_centroide` IS NULL OR (`lat_centroide` >= -34 AND `lat_centroide` <= 5.3)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_uf ALTER COLUMN `lon_centroide` COMMENT 'Longitude mediana dos CEPs da UF (graus)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_uf DROP CONSTRAINT IF EXISTS ck_dim_uf_lon_centroide,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_uf ADD CONSTRAINT ck_dim_uf_lon_centroide CHECK (`lon_centroide` IS NULL OR (`lon_centroide` >= -74 AND `lon_centroide` <= -34.7)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_uf ADD CONSTRAINT pk_dim_uf PRIMARY KEY (`uf`),aplicado,PRIMARY KEY
+COMMENT ON TABLE workspace.frete_gold.dim_tempo IS 'Calendário diário da janela de análise (jan/2017 a ago/2018).',aplicado,comentário de tabela
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `data_sk` COMMENT 'Chave da data no formato AAAAMMDD',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `data_sk` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_data_sk,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_tempo ADD CONSTRAINT ck_dim_tempo_data_sk CHECK (`data_sk` >= 20170101 AND `data_sk` <= 20180831),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `data` COMMENT 'Data',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `data` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `ano` COMMENT 'Ano',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `ano` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_ano,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_tempo ADD CONSTRAINT ck_dim_tempo_ano CHECK (`ano` >= 2017 AND `ano` <= 2018),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `mes` COMMENT 'Mês (1–12)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `mes` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_mes,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_tempo ADD CONSTRAINT ck_dim_tempo_mes CHECK (`mes` >= 1 AND `mes` <= 12),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `ano_mes` COMMENT 'Ano e mês (AAAA-MM)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `ano_mes` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `nome_mes` COMMENT 'Mês abreviado',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `nome_mes` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_nome_mes,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.dim_tempo ADD CONSTRAINT ck_dim_tempo_nome_mes CHECK (`nome_mes` IN ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'))",aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `trimestre` COMMENT 'Trimestre (1–4)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `trimestre` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_trimestre,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_tempo ADD CONSTRAINT ck_dim_tempo_trimestre CHECK (`trimestre` >= 1 AND `trimestre` <= 4),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `dia_semana` COMMENT 'Dia da semana',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `dia_semana` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_tempo DROP CONSTRAINT IF EXISTS ck_dim_tempo_dia_semana,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.dim_tempo ADD CONSTRAINT ck_dim_tempo_dia_semana CHECK (`dia_semana` IN ('segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'))",aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `fim_de_semana` COMMENT 'Sábado ou domingo',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_tempo ALTER COLUMN `fim_de_semana` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_tempo ADD CONSTRAINT pk_dim_tempo PRIMARY KEY (`data_sk`),aplicado,PRIMARY KEY
+"COMMENT ON TABLE workspace.frete_gold.dim_produto IS 'Produtos vendidos na janela, com categoria e medidas usadas no cálculo do frete.'",aplicado,comentário de tabela
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `produto_sk` COMMENT 'Chave substituta do produto',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `produto_sk` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_produto_sk,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_produto ADD CONSTRAINT ck_dim_produto_produto_sk CHECK (`produto_sk` >= 1),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `produto_id` COMMENT 'Identificador do produto na Olist (hash)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `produto_id` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `categoria` COMMENT 'Categoria do produto (nome original em português)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `categoria` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `peso_g` COMMENT 'Peso informado (g)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_peso_g,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_produto ADD CONSTRAINT ck_dim_produto_peso_g CHECK (`peso_g` IS NULL OR (`peso_g` >= 1 AND `peso_g` <= 50000)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `comprimento_cm` COMMENT 'Comprimento da embalagem (cm)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_comprimento_cm,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_produto ADD CONSTRAINT ck_dim_produto_comprimento_cm CHECK (`comprimento_cm` IS NULL OR (`comprimento_cm` >= 1 AND `comprimento_cm` <= 120)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `altura_cm` COMMENT 'Altura da embalagem (cm)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_altura_cm,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_produto ADD CONSTRAINT ck_dim_produto_altura_cm CHECK (`altura_cm` IS NULL OR (`altura_cm` >= 1 AND `altura_cm` <= 120)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `largura_cm` COMMENT 'Largura da embalagem (cm)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_largura_cm,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_produto ADD CONSTRAINT ck_dim_produto_largura_cm CHECK (`largura_cm` IS NULL OR (`largura_cm` >= 1 AND `largura_cm` <= 120)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `volume_cm3` COMMENT 'Volume da embalagem (cm³)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_volume_cm3,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_produto ADD CONSTRAINT ck_dim_produto_volume_cm3 CHECK (`volume_cm3` IS NULL OR (`volume_cm3` >= 1 AND `volume_cm3` <= 1728000)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `peso_real_kg` COMMENT 'Peso real (kg)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_peso_real_kg,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_produto ADD CONSTRAINT ck_dim_produto_peso_real_kg CHECK (`peso_real_kg` IS NULL OR (`peso_real_kg` >= 0.001 AND `peso_real_kg` <= 50)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `peso_cubado_kg` COMMENT 'Peso cubado (kg) = volume ÷ 6000',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_peso_cubado_kg,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_produto ADD CONSTRAINT ck_dim_produto_peso_cubado_kg CHECK (`peso_cubado_kg` IS NULL OR (`peso_cubado_kg` >= 0 AND `peso_cubado_kg` <= 300)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `peso_taxado_kg` COMMENT 'Peso usado para cobrança: maior entre real e cubado (kg)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto DROP CONSTRAINT IF EXISTS ck_dim_produto_peso_taxado_kg,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_produto ADD CONSTRAINT ck_dim_produto_peso_taxado_kg CHECK (`peso_taxado_kg` IS NULL OR (`peso_taxado_kg` >= 0 AND `peso_taxado_kg` <= 300)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `medidas_incompletas` COMMENT 'Peso ou alguma dimensão ausente',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_produto ALTER COLUMN `medidas_incompletas` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_produto ADD CONSTRAINT pk_dim_produto PRIMARY KEY (`produto_sk`),aplicado,PRIMARY KEY
+"COMMENT ON TABLE workspace.frete_gold.dim_vendedor IS 'Vendedores com vendas na janela, localização de origem e porte.'",aplicado,comentário de tabela
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `vendedor_sk` COMMENT 'Chave substituta do vendedor',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `vendedor_sk` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_vendedor DROP CONSTRAINT IF EXISTS ck_dim_vendedor_vendedor_sk,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_vendedor ADD CONSTRAINT ck_dim_vendedor_vendedor_sk CHECK (`vendedor_sk` >= 1),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `vendedor_id` COMMENT 'Identificador do vendedor na Olist (hash)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `vendedor_id` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `uf` COMMENT 'UF do vendedor',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `uf` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_vendedor DROP CONSTRAINT IF EXISTS ck_dim_vendedor_uf,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.dim_vendedor ADD CONSTRAINT ck_dim_vendedor_uf CHECK (`uf` IN ('AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'))",aplicado,CHECK (domínio)
+"ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `cidade` COMMENT 'Cidade do vendedor (minúsculas, sem acento)'",aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `cidade` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `cep_prefixo` COMMENT 'Prefixo de CEP (5 dígitos)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `cep_prefixo` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `itens_vendidos_janela` COMMENT 'Itens vendidos na janela',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `itens_vendidos_janela` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_vendedor DROP CONSTRAINT IF EXISTS ck_dim_vendedor_itens_vendidos_janela,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.dim_vendedor ADD CONSTRAINT ck_dim_vendedor_itens_vendidos_janela CHECK (`itens_vendidos_janela` >= 1 AND `itens_vendidos_janela` <= 5000),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `porte` COMMENT 'Porte pelo volume de itens',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.dim_vendedor ALTER COLUMN `porte` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.dim_vendedor DROP CONSTRAINT IF EXISTS ck_dim_vendedor_porte,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.dim_vendedor ADD CONSTRAINT ck_dim_vendedor_porte CHECK (`porte` IN ('micro (1–9 itens)', 'pequeno (10–49)', 'médio (50–199)', 'grande (200+)'))",aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.dim_vendedor ADD CONSTRAINT pk_dim_vendedor PRIMARY KEY (`vendedor_sk`),aplicado,PRIMARY KEY
+"COMMENT ON TABLE workspace.frete_gold.fato_item_frete IS 'Fato do frete. Grão: item vendido (pedido × sequência do item), compras de jan/2017 a ago/2018 que geraram envio.'",aplicado,comentário de tabela
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `item_sk` COMMENT 'Chave substituta do item',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `item_sk` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_item_sk,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_item_sk CHECK (`item_sk` >= 1),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `pedido_id` COMMENT 'Identificador do pedido (hash)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `pedido_id` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `item_seq` COMMENT 'Sequência do item dentro do pedido',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `item_seq` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_item_seq,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_item_seq CHECK (`item_seq` >= 1 AND `item_seq` <= 25),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `data_compra_sk` COMMENT 'Data da compra (FK dim_tempo)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `data_compra_sk` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_data_compra_sk,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_data_compra_sk CHECK (`data_compra_sk` >= 20170101 AND `data_compra_sk` <= 20180831),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `produto_sk` COMMENT 'Produto (FK dim_produto)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `produto_sk` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_produto_sk,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_produto_sk CHECK (`produto_sk` >= 1),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `vendedor_sk` COMMENT 'Vendedor (FK dim_vendedor)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `vendedor_sk` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_vendedor_sk,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_vendedor_sk CHECK (`vendedor_sk` >= 1),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `uf_origem` COMMENT 'UF do vendedor — papel origem (FK dim_uf)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `uf_origem` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_uf_origem,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_uf_origem CHECK (`uf_origem` IN ('AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'))",aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `uf_destino` COMMENT 'UF do cliente — papel destino (FK dim_uf)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `uf_destino` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_uf_destino,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_uf_destino CHECK (`uf_destino` IN ('AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'))",aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `status_pedido` COMMENT 'Status do pedido na extração',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `status_pedido` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_status_pedido,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_status_pedido CHECK (`status_pedido` IN ('delivered', 'shipped', 'invoiced', 'processing', 'created', 'approved'))",aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `preco` COMMENT 'Preço do item (R$)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `preco` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_preco,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_preco CHECK (`preco` >= 0.01 AND `preco` <= 10000),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `frete` COMMENT 'Frete do item (R$); a Olist rateia o frete do pedido entre os itens',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `frete` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_frete,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_frete CHECK (`frete` >= 0 AND `frete` <= 1000),aplicado,CHECK (domínio)
+"ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `frete_relativo` COMMENT 'Frete ÷ preço do item (0,30 = frete equivale a 30% do preço)'",aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `frete_relativo` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_frete_relativo,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_frete_relativo CHECK (`frete_relativo` >= 0 AND `frete_relativo` <= 100),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `frete_gratis` COMMENT 'Frete igual a zero',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `frete_gratis` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `faixa_frete_relativo` COMMENT 'Faixa do frete relativo',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `faixa_frete_relativo` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_faixa_frete_relativo,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_faixa_frete_relativo CHECK (`faixa_frete_relativo` IN ('0 (grátis)', 'até 10%', '10–20%', '20–30%', '30–50%', '50–100%', 'acima de 100%'))",aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `distancia_km` COMMENT 'Distância em linha reta vendedor → cliente (km)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_distancia_km,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_distancia_km CHECK (`distancia_km` IS NULL OR (`distancia_km` >= 0 AND `distancia_km` <= 4500)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `faixa_distancia` COMMENT 'Faixa de distância',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_faixa_distancia,aplicado,remoção prévia de CHECK
+"ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_faixa_distancia CHECK (`faixa_distancia` IS NULL OR (`faixa_distancia` IN ('até 100 km', '100–500 km', '500–1.000 km', '1.000–2.000 km', '2.000 km ou mais')))",aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `mesma_uf` COMMENT 'Vendedor e cliente na mesma UF',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `mesma_uf` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `itens_no_pedido` COMMENT 'Quantidade de itens no pedido',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `itens_no_pedido` SET NOT NULL,aplicado,NOT NULL
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_itens_no_pedido,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_itens_no_pedido CHECK (`itens_no_pedido` >= 1 AND `itens_no_pedido` <= 25),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ALTER COLUMN `nota_avaliacao` COMMENT 'Nota da avaliação do pedido (1–5)',aplicado,comentário de coluna
+ALTER TABLE workspace.frete_gold.fato_item_frete DROP CONSTRAINT IF EXISTS ck_fato_item_frete_nota_avaliacao,aplicado,remoção prévia de CHECK
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT ck_fato_item_frete_nota_avaliacao CHECK (`nota_avaliacao` IS NULL OR (`nota_avaliacao` >= 1 AND `nota_avaliacao` <= 5)),aplicado,CHECK (domínio)
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT pk_fato_item_frete PRIMARY KEY (`item_sk`),aplicado,PRIMARY KEY
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT fk_fato_data_compra_sk FOREIGN KEY (`data_compra_sk`) REFERENCES workspace.frete_gold.dim_tempo (`data_sk`),aplicado,FOREIGN KEY
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT fk_fato_produto_sk FOREIGN KEY (`produto_sk`) REFERENCES workspace.frete_gold.dim_produto (`produto_sk`),aplicado,FOREIGN KEY
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT fk_fato_vendedor_sk FOREIGN KEY (`vendedor_sk`) REFERENCES workspace.frete_gold.dim_vendedor (`vendedor_sk`),aplicado,FOREIGN KEY
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT fk_fato_uf_origem FOREIGN KEY (`uf_origem`) REFERENCES workspace.frete_gold.dim_uf (`uf`),aplicado,FOREIGN KEY
+ALTER TABLE workspace.frete_gold.fato_item_frete ADD CONSTRAINT fk_fato_uf_destino FOREIGN KEY (`uf_destino`) REFERENCES workspace.frete_gold.dim_uf (`uf`),aplicado,FOREIGN KEY

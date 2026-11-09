@@ -1,7 +1,7 @@
 {
-  "data_coleta": "2026-11-09T09:40:46",
-  "ambiente": "Execução local de teste — C:\\Users\\Usuario\\Desktop\\Claude\\MVP3-SSD-Frete-Olist\\_local",
-  "pasta_bronze": "C:\\Users\\Usuario\\Desktop\\Claude\\MVP3-SSD-Frete-Olist\\_local\\bronze\\coleta=2026-11-09",
+  "data_coleta": "2026-11-09T14:58:14",
+  "ambiente": "Databricks — catálogo workspace, schemas frete_bronze, frete_silver, frete_gold",
+  "pasta_bronze": "/Volumes/workspace/frete_bronze/arquivos/coleta=2026-11-09",
   "forma_coleta_olist": "kagglehub (olistbr/brazilian-ecommerce, pasta 2)",
   "forma_coleta_ibge": "API SIDRA (https://apisidra.ibge.gov.br/values/t/6579/n3/all/v/9324/p/2018)",
   "licenca_olist": "CC BY-NC-SA 4.0",
@@ -92,9 +92,9 @@
       "fonte": "IBGE — SIDRA 6579",
       "linhas": 27,
       "colunas": 4,
-      "bytes": 789,
+      "bytes": 761,
       "mb": 0.0,
-      "sha256": "e61b6fc59722b251a8384757369891d5809f470e1c7b30c3ef4d325270596bb3"
+      "sha256": "06421a1a8737bb7dc79a47d74ba871d5e8dd3c6c733965b5ed3d6d374f1680e5"
     }
   ]
 }

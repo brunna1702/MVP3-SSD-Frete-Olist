@@ -1,17 +1,17 @@
 regra,camada_destino,tabela,descricao,linhas_afetadas,linhas_resultantes,executado_em
-R01,silver,pedidos/itens,"Tipagem: datas como timestamp, preço e frete como decimal (R$), sequência do item como inteiro",212091,212091,2026-11-09T09:41:34
-R02,silver,clientes/vendedores,Prefixo de CEP padronizado com 5 dígitos (zeros à esquerda),0,102536,2026-11-09T09:41:34
-R03,silver,clientes/vendedores,UF em maiúsculas e validada nas 27 UFs; cidade em minúsculas sem acento,0,102536,2026-11-09T09:41:34
-R04,silver,geo_cep,Descarta coordenadas fora do território brasileiro e resume a geolocalização em um centroide (mediana) por prefixo de CEP,981153,19010,2026-11-09T09:41:43
-R05,silver,produtos,Categoria ausente recebe 'sem_categoria' (mantém o item na análise),610,32951,2026-11-09T09:41:43
-R06,silver,produtos,Converte g→kg; peso cubado = C×A×L (cm³) ÷ 6000; peso taxado = maior entre peso real e cubado; medidas nulas ou zero viram nulo + flag,6,32951,2026-11-09T09:41:44
-R07,silver,avaliacoes,Uma avaliação por pedido: mantém a respondida por último; texto livre descartado (ver R13),551,98673,2026-11-09T09:41:45
-R08,silver,pedidos,"Escopo: compras de jan/2017 a ago/2018, exceto pedidos cancelados ou indisponíveis (não geraram envio) e pedidos sem itens",1536,97905,2026-11-09T09:41:47
-R13,silver,clientes/avaliacoes,"Minimização (LGPD): customer_unique_id, título e texto das avaliações não seguem para silver e gold",198665,198114,2026-11-09T09:41:48
-R12,silver,ibge_uf,Conciliação Olist × IBGE: código IBGE da UF convertido em sigla (chave comum às duas bases); região atribuída pela sigla,0,27,2026-11-09T09:41:48
-R11,gold,dim_vendedor,"Porte do vendedor pelo nº de itens vendidos na janela: micro (1–9), pequeno (10–49), médio (50–199), grande (200+)",3029,3029,2026-11-09T09:42:11
-R09,gold,fato_item_frete,Frete relativo = frete do item ÷ preço do item (R$/R$); frete zero sinalizado como frete grátis,383,111752,2026-11-09T09:42:12
-R10,gold,fato_item_frete,"Distância vendedor → cliente pela fórmula de Haversine entre os centroides dos CEPs (linha reta, km); nula quando um dos CEPs não tem geolocalização",549,111752,2026-11-09T09:42:12
-R14,gold,fato_item_frete,"Chaves substitutas (produto_sk, vendedor_sk, item_sk), chave de data AAAAMMDD e contagem de itens no pedido (a Olist rateia o frete do pedido entre os itens)",111752,111752,2026-11-09T09:42:13
-R15,gold,fato_item_frete,Grão = item vendido (pedido × sequência): é o nível em que a Olist registra preço e frete,0,111752,2026-11-09T09:42:13
-R16,gold,todas,"Validação contra o Catálogo de Dados antes da carga (tipos, obrigatoriedade, domínios); carga idempotente (DROP + CREATE)",0,147994,2026-11-09T09:42:13
+R01,silver,pedidos/itens,"Tipagem: datas como timestamp, preço e frete como decimal (R$), sequência do item como inteiro",212091,212091,2026-11-09T13:31:38
+R02,silver,clientes/vendedores,Prefixo de CEP padronizado com 5 dígitos (zeros à esquerda),0,102536,2026-11-09T13:31:38
+R03,silver,clientes/vendedores,UF em maiúsculas e validada nas 27 UFs; cidade em minúsculas sem acento,0,102536,2026-11-09T13:31:38
+R04,silver,geo_cep,Descarta coordenadas fora do território brasileiro e resume a geolocalização em um centroide (mediana) por prefixo de CEP,981153,19010,2026-11-09T13:31:40
+R05,silver,produtos,Categoria ausente recebe 'sem_categoria' (mantém o item na análise),610,32951,2026-11-09T13:31:40
+R06,silver,produtos,Converte g→kg; peso cubado = C×A×L (cm³) ÷ 6000; peso taxado = maior entre peso real e cubado; medidas nulas ou zero viram nulo + flag,6,32951,2026-11-09T13:31:40
+R07,silver,avaliacoes,Uma avaliação por pedido: mantém a respondida por último; texto livre descartado (ver R13),551,98673,2026-11-09T13:31:41
+R08,silver,pedidos,"Escopo: compras de jan/2017 a ago/2018, exceto pedidos cancelados ou indisponíveis (não geraram envio) e pedidos sem itens",1536,97905,2026-11-09T13:31:41
+R13,silver,clientes/avaliacoes,"Minimização (LGPD): customer_unique_id, título e texto das avaliações não seguem para silver e gold",198665,198114,2026-11-09T13:31:41
+R12,silver,ibge_uf,Conciliação Olist × IBGE: código IBGE da UF convertido em sigla (chave comum às duas bases); região atribuída pela sigla,0,27,2026-11-09T13:31:41
+R11,gold,dim_vendedor,"Porte do vendedor pelo nº de itens vendidos na janela: micro (1–9), pequeno (10–49), médio (50–199), grande (200+)",3029,3029,2026-11-09T13:45:55
+R09,gold,fato_item_frete,Frete relativo = frete do item ÷ preço do item (R$/R$); frete zero sinalizado como frete grátis,383,111752,2026-11-09T13:45:55
+R10,gold,fato_item_frete,"Distância vendedor → cliente pela fórmula de Haversine entre os centroides dos CEPs (linha reta, km); nula quando um dos CEPs não tem geolocalização",549,111752,2026-11-09T13:45:56
+R14,gold,fato_item_frete,"Chaves substitutas (produto_sk, vendedor_sk, item_sk), chave de data AAAAMMDD e contagem de itens no pedido (a Olist rateia o frete do pedido entre os itens)",111752,111752,2026-11-09T13:45:56
+R15,gold,fato_item_frete,Grão = item vendido (pedido × sequência): é o nível em que a Olist registra preço e frete,0,111752,2026-11-09T13:45:56
+R16,gold,todas,"Validação contra o Catálogo de Dados antes da carga (tipos, obrigatoriedade, domínios); carga idempotente (DROP + CREATE)",0,147994,2026-11-09T13:45:56
